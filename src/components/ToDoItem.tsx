@@ -1,9 +1,9 @@
 import React from "react"
 
-function ToDoItem({ children, onDone, onDelete, id, done = false }) {
+function ToDoItem({ children, onDone, onDelete, id, order, done = false }) {
     return (
         <tr>
-            <th scope="row">{id + 1}</th>
+            <th scope="row">{order}</th>
             <td>{children}</td>
             <td>
                 <button
