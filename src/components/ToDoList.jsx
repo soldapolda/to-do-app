@@ -1,6 +1,6 @@
 import ToDoItem from "./ToDoItem.tsx"
 
-function ToDoList() {
+function ToDoList({ toDos, onDelete, onDone }) {
     return (
         <table className="table table-bordered">
             <thead>
@@ -12,18 +12,21 @@ function ToDoList() {
                 </tr>
             </thead>
             <tbody>
-                <ToDoItem
-                    onDone={(id) => {
-                        console.log(id)
-                    }}
-                    onDelete={(id) => {
-                        console.log(id)
-                    }}
-                    done={true}
-                    id="5"
-                >
-                    Posekat travu jo
-                </ToDoItem>
+                {toDos.map((toDo, index) => (
+                    <ToDoItem
+                        key={index}
+                        onDone={(id) => {
+                            onDone(id)
+                        }}
+                        onDelete={(id) => {
+                            onDelete(id)
+                        }}
+                        done={toDo.done}
+                        id={index}
+                    >
+                        {toDo.title}
+                    </ToDoItem>
+                ))}
             </tbody>
         </table>
     )
