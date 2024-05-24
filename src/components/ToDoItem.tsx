@@ -3,7 +3,7 @@ import React from "react"
 function ToDoItem({ children, onDone, onDelete, id, done = false }) {
     return (
         <tr>
-            <th scope="row">1</th>
+            <th scope="row">{id + 1}</th>
             <td>{children}</td>
             <td>
                 <button
