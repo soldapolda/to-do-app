@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 function ToDoForm({ onSubmit }) {
@@ -13,6 +14,16 @@ function ToDoForm({ onSubmit }) {
         reset()
     }
 
+    const [showError, setShowError] = useState(false)
+
+    useEffect(() => {
+        if (errors.title) {
+            setShowError(true)
+            const timer = setTimeout(() => setShowError(false), 5000)
+            return () => clearTimeout(timer)
+        }
+    }, [errors.title])
+
     return (
         <form className="mt-5" onSubmit={handleSubmit(onAddToDo)}>
             <div className="mb-3">
@@ -27,9 +38,11 @@ function ToDoForm({ onSubmit }) {
                     type="text"
                     className="form-control"
                 />
-                <div className="form-text text-danger">
-                    {errors.title?.message}
-                </div>
+                {showError && (
+                    <div className="form-text text-danger">
+                        {errors.title?.message}
+                    </div>
+                )}
             </div>
             <button type="submit" className="btn btn-success">
                 Add to list

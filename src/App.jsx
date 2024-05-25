@@ -14,7 +14,7 @@ function App() {
     useEffect(() => {
         const jsonData = JSON.stringify(toDos)
         localStorage.setItem("to_dos", jsonData)
-    }, toDos)
+    }, [toDos])
 
     const visibleToDos = toDos.filter(
         (toDo) => toDoFilter === "all" || toDoFilter == String(toDo.done)
