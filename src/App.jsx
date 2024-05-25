@@ -5,11 +5,7 @@ import ToDoList from "./components/ToDoList"
 import ToDoForm from "./components/ToDoForm"
 
 function App() {
-    const [toDos, setToDos] = useState([
-        { title: "Posekat", done: false, id: 1 },
-        { title: "Zalet travu kkokot", done: false, id: 2 },
-        { title: "Posekat", done: true, id: 5 },
-    ])
+    const [toDos, setToDos] = useState(localStorage.getItem("to_dos") ?? [])
 
     const [toDoFilter, setToDoFilter] = useState("all")
 
@@ -25,7 +21,7 @@ function App() {
         const newToDo = {
             title: data.title,
             done: false,
-            id: toDos[toDos.length - 1].id + 1,
+            id: toDos.length === 0 ? 0 : toDos[toDos.length - 1].id + 1,
         }
         setToDos([...toDos, newToDo])
     }

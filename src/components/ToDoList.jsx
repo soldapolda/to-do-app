@@ -28,6 +28,7 @@ function ToDoList({ toDos, onDelete, onDone }) {
                         {toDo.title}
                     </ToDoItem>
                 ))}
+                {toDos.length === 0 && <tr className="text-danger">no data</tr>}
             </tbody>
         </table>
     )
