@@ -2,6 +2,7 @@ import { useState } from "react"
 import Header from "./components/Header"
 import Filter from "./components/Filter"
 import ToDoList from "./components/ToDoList"
+import ToDoForm from "./components/ToDoForm"
 
 function App() {
     const [toDos, setToDos] = useState([
@@ -20,6 +21,15 @@ function App() {
         setToDos(toDos.filter((toDo) => toDo.id !== id))
     }
 
+    const handleAdd = (data) => {
+        const newToDo = {
+            title: data.title,
+            done: false,
+            id: toDos[toDos.length - 1].id + 1,
+        }
+        setToDos([...toDos, newToDo])
+    }
+
     const handleDoneToggle = (id) => {
         setToDos(
             toDos.map((toDo) => {
@@ -36,8 +46,6 @@ function App() {
 
     const handleFilterChange = (selectedValue) => {
         setToDoFilter(selectedValue)
-        console.log(toDos)
-        console.log(visibleToDos)
     }
 
     return (
@@ -53,6 +61,7 @@ function App() {
                 onDelete={handleDelete}
                 onDone={handleDoneToggle}
             />
+            <ToDoForm onSubmit={handleAdd} />
         </>
     )
 }
