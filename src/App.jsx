@@ -1,13 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Header from "./components/Header"
 import Filter from "./components/Filter"
 import ToDoList from "./components/ToDoList"
 import ToDoForm from "./components/ToDoForm"
 
 function App() {
-    const [toDos, setToDos] = useState(localStorage.getItem("to_dos") ?? [])
+    const [toDos, setToDos] = useState(
+        JSON.parse(localStorage.getItem("to_dos")) ?? []
+    )
 
     const [toDoFilter, setToDoFilter] = useState("all")
+
+    useEffect(() => {
+        const jsonData = JSON.stringify(toDos)
+        localStorage.setItem("to_dos", jsonData)
+    }, toDos)
 
     const visibleToDos = toDos.filter(
         (toDo) => toDoFilter === "all" || toDoFilter == String(toDo.done)
